@@ -1,16 +1,42 @@
-import { SingleLinkedList } from "../LinkedList/SingleLinkedList";
+import { ListNode } from '../LinkedList/ListNode'
 
-export class Stack extends SingleLinkedList {
+export class Stack {
+    public head: ListNode
+    public size: number
+
     constructor () {
-        super()
+        this.head = null
+        this.size = 0
+    }
+
+    incrementSize () {
+        this.size += 1
+    }
+
+    decrementSize () {
+        if (this.size == 0) {
+            throw new Error ("Can't decrement empty list size")
+        }
+
+        this.size -= 1
     }
 
     push (data: any) {
-        return this.addToFront(data)
+        const new_node = new ListNode(data)
+
+        new_node.next = this.head
+        this.head = new_node
+
+        this.incrementSize()
     }
 
     pop () {
-        return this.removeFromFront()
+        const removed_node = this.head
+        this.head = this.head.next
+
+        this.decrementSize()
+
+        return removed_node
     }
 
     peek () {
@@ -18,6 +44,11 @@ export class Stack extends SingleLinkedList {
     }
 
     isEmpty () {
-        return this.size == 0
+        return this.head == null && this.size == 0
+    }
+
+    clear () {
+        this.head = null
+        this.size = 0
     }
 }
