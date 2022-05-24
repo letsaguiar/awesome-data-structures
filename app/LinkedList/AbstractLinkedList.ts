@@ -16,6 +16,10 @@ export class AbstractLinkedList {
     }
 
     decrementSize () {
+        if (this.size == 0) {
+            throw new Error ("Can't decrement empty list size")
+        }
+
         this.size -= 1
     }
 
