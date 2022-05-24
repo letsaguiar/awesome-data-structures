@@ -81,10 +81,4 @@ export class SingleLinkedList extends AbstractLinkedList {
 
         return removed_node
     }
-
-    clear () {
-        this.head = null
-        this.tail = null
-        this.size = 0
-    }
 }
