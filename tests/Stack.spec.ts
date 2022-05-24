@@ -1,5 +1,28 @@
 import { Stack } from "../app/Stack/Stack";
 
+describe('Size Operations', () => {
+    test('Increment size', () => {
+        const new_list = new Stack()
+        new_list.incrementSize()
+
+        expect(new_list.size).toBe(1)
+    })
+
+    test('Decrement size', () => {
+        const new_list = new Stack()
+        new_list.incrementSize()
+        new_list.decrementSize()
+
+        expect(new_list.size).toBe(0)
+    })
+
+    test('Decrement empty list size', () => {
+        const new_list = () => new Stack().decrementSize()
+
+        expect(new_list).toThrowError()
+    })
+})
+
 describe('Stack Operations', () => {
     test('Create an empty stack', () => {
         const stack = new Stack()
