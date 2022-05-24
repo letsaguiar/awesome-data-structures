@@ -58,15 +58,14 @@ export class SingleLinkedList extends AbstractLinkedList {
     }
 
     removeFromBack () : ListNode {
+        const removed_node = this.tail
+
         if (this.size == 0) {
             throw new Error("Can't remove from empty list")
         }
         else if (this.size == 1) {
             this.head = null
             this.tail = null
-
-            this.decrementSize()
-            return null
         }
         else {
             let current_node = this.head
@@ -74,12 +73,18 @@ export class SingleLinkedList extends AbstractLinkedList {
                 current_node = current_node.next
             }
 
-            const removed_node = current_node.next
             current_node.next = null
             this.tail = current_node
-
-            this.decrementSize()
-            return removed_node
         }
+
+        this.decrementSize()
+
+        return removed_node
+    }
+
+    clear () {
+        this.head = null
+        this.tail = null
+        this.size = 0
     }
 }
