@@ -1,4 +1,5 @@
 import { AbstractLinkedList } from "../app/LinkedList/AbstractLinkedList";
+import { ListNode } from '../app/LinkedList/ListNode'
 
 describe('Size functions', () => {
     test('Increment size', () => {
@@ -20,6 +21,38 @@ describe('Size functions', () => {
         const new_list = () => new AbstractLinkedList().decrementSize()
 
         expect(new_list).toThrowError()
+    })
+})
+
+describe('Implemented functions', () => {
+    test('Is empty is true', () => {
+        const new_list = new AbstractLinkedList()
+
+        expect(new_list.isEmpty()).toBe(true)
+    })
+
+    test('Is empty is false', () => {
+        const new_list = new AbstractLinkedList()
+        
+        const new_node = new ListNode(1)
+        new_list.head = new_node
+        new_list.tail = new_node
+        new_list.size = 1
+
+        expect(new_list.isEmpty()).toBe(false)
+    })
+
+    test('Clear list', () => {
+        const new_list = new AbstractLinkedList()
+        
+        const new_node = new ListNode(1)
+        new_list.head = new_node
+        new_list.tail = new_node
+        new_list.size = 1
+
+        new_list.clear()
+
+        expect(new_list.isEmpty()).toBe(true)
     })
 })
 

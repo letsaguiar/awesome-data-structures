@@ -1,28 +1,5 @@
 import { Stack } from "../app/Stack/Stack";
 
-describe('Size Operations', () => {
-    test('Increment size', () => {
-        const new_list = new Stack()
-        new_list.incrementSize()
-
-        expect(new_list.size).toBe(1)
-    })
-
-    test('Decrement size', () => {
-        const new_list = new Stack()
-        new_list.incrementSize()
-        new_list.decrementSize()
-
-        expect(new_list.size).toBe(0)
-    })
-
-    test('Decrement empty list size', () => {
-        const new_list = () => new Stack().decrementSize()
-
-        expect(new_list).toThrowError()
-    })
-})
-
 describe('Stack Operations', () => {
     test('Create an empty stack', () => {
         const stack = new Stack()
@@ -80,29 +57,5 @@ describe('Stack Operations', () => {
 
         expect(stack.size).toBe(2)
         expect(stack.peek().data).toBe(2)
-    })
-
-    test('Is empty is true', () => {
-        const stack = new Stack()
-
-        expect(stack.isEmpty()).toBe(true)
-    })
-
-    test('Is empty is false', () => {
-        const stack = new Stack()
-        stack.push(1)
-
-        expect(stack.isEmpty()).toBe(false)
-    })
-
-    test('Clear stack', () => {
-        const stack = new Stack()
-        stack.push(1)
-        stack.push(2)
-        stack.push(3)
-        stack.clear()
-
-        expect(stack.peek()).toBe(null)
-        expect(stack.isEmpty()).toBe(true)
     })
 })

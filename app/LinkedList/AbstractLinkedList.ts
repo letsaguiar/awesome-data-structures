@@ -38,4 +38,14 @@ export class AbstractLinkedList {
     removeFromBack () : ListNode {
         throw new Error('Method not implemented')
     }
+
+    isEmpty () {
+        return this.head == null && this.tail == null && this.size == 0
+    }
+
+    clear () {
+        this.head = null
+        this.tail = null
+        this.size = 0
+    }
 }
