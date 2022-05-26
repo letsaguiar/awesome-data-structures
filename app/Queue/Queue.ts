@@ -2,11 +2,11 @@ import { SingleLinkedList } from "../LinkedList/SingleLinkedList";
 
 export class Queue extends SingleLinkedList {
     enqueue (data: any) {
-        this.addToBack(data)
+        return this.addToBack(data)
     }
 
     dequeue () {
-        this.removeFromFront()
+        return this.removeFromFront()
     }
 
     peek () {

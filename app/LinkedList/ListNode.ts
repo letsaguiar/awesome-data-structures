@@ -1,7 +1,7 @@
 export class ListNode {
     data: any
-    next: ListNode
-    prev: ListNode
+    next?: ListNode
+    prev?: ListNode
 
     constructor (data: any) {
         this.data = data
