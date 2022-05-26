@@ -52,6 +52,7 @@ export class DoublyLinkedList extends AbstractLinkedList {
         }
         else {
             this.head = this.head.next
+            this.head.prev = null
         }
 
         this.decrementSize()
@@ -71,6 +72,7 @@ export class DoublyLinkedList extends AbstractLinkedList {
         }
         else {
             this.tail = this.tail.prev
+            this.tail.next = null
         }
 
         this.decrementSize()
