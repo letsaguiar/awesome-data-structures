@@ -54,6 +54,36 @@ describe('Implemented functions', () => {
 
         expect(new_list.isEmpty()).toBe(true)
     })
+
+    test('Turn list into array', () => {
+        const new_list = new AbstractLinkedList()
+        
+        const node1 = new ListNode(1)
+        const node2 = new ListNode(2)
+        node1.next = node2
+
+        new_list.head = node1
+        new_list.tail = node2
+        new_list.size = 2
+
+        expect(new_list.toArray()).toStrictEqual([1, 2])
+    })
+
+    test('Check if the list contains an element', () => {
+        const new_list = new AbstractLinkedList()
+        
+        const node1 = new ListNode(1)
+        const node2 = new ListNode(2)
+        node1.next = node2
+
+        new_list.head = node1
+        new_list.tail = node2
+        new_list.size = 2
+
+        expect(new_list.contains(1)).toBe(true)
+        expect(new_list.contains(2)).toBe(true)
+        expect(new_list.contains(3)).toBe(false)
+    })
 })
 
 describe('Unimplemented functions', () => {
@@ -69,6 +99,12 @@ describe('Unimplemented functions', () => {
         expect(new_list).toThrowError()
     })
 
+    test('insertAt', () => {
+        const new_list = () => new AbstractLinkedList().insertAt(1, 1)
+
+        expect(new_list).toThrowError()
+    })
+
     test('removeFromFront', () => {
         const new_list = () => new AbstractLinkedList().removeFromFront()
 
@@ -77,6 +113,18 @@ describe('Unimplemented functions', () => {
 
     test('removeFromBack', () => {
         const new_list = () => new AbstractLinkedList().removeFromBack()
+
+        expect(new_list).toThrowError()
+    })
+
+    test('deletAt', () => {
+        const new_list = () => new AbstractLinkedList().deleteAt(1)
+
+        expect(new_list).toThrowError()
+    })
+
+    test('findAndRemove', () => {
+        const new_list = () => new AbstractLinkedList().findAndRemove(1)
 
         expect(new_list).toThrowError()
     })
