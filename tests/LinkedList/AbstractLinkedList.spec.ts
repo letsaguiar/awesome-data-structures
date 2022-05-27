@@ -1,5 +1,5 @@
-import { AbstractLinkedList } from "../app/LinkedList/AbstractLinkedList";
-import { ListNode } from '../app/LinkedList/ListNode'
+import { AbstractLinkedList } from "../../app/LinkedList/AbstractLinkedList";
+import { ListNode } from '../../app/LinkedList/ListNode'
 
 let empty_list = new AbstractLinkedList()
 let full_list = new AbstractLinkedList()

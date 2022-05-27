@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from "../app/LinkedList/DoublyLinkedList";
+import { DoublyLinkedList } from "../../app/LinkedList/DoublyLinkedList";
 
 describe('Add to list', () => {
     test('Create a new cleaned list', () => {

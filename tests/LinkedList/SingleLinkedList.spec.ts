@@ -1,4 +1,4 @@
-import { SingleLinkedList } from "../app/LinkedList/SingleLinkedList";
+import { SingleLinkedList } from "../../app/LinkedList/SingleLinkedList";
 
 describe('Add to list', () => {
     test('Create a new cleaned list', () => {
