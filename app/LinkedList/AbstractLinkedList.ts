@@ -67,7 +67,7 @@ export class AbstractLinkedList {
         throw new Error('Method not implemented')
     }
 
-    find (data: any, options?: {returnNode? : boolean}) : any {
+    private findAndReturnData (data: any, options?: {returnNode? : boolean}) : any {
         let current_node = this.head
         while (current_node != null) {
             if (current_node.data == data) break
@@ -77,8 +77,37 @@ export class AbstractLinkedList {
         return this.checkReturnOptions(current_node, options)
     }
 
+    private findAndReturnIndex (data: any) : number {
+        let current_node = this.head
+        let index = 0
+        while (current_node != null) {
+            if (current_node.data == data) break
+            current_node = current_node.next
+            index += 1
+        }
+
+        return current_node ? index : -1
+    }
+
+    find (data: any, options?: {returnNode?: boolean, returnIndex?: boolean}) {
+        
+        if (options?.returnIndex) {
+            return this.findAndReturnIndex(data)
+        }
+        else {
+            return this.findAndReturnData(data, options)
+        }
+
+    }
+
     findAndRemove (data: any) : any {
-        throw new Error('Method not implemented')
+        const node_index = this.find(data, {returnIndex: true})
+
+        if (!node_index) {
+            throw new Error('Element not found!')
+        }
+
+        return this.deleteAt(node_index)
     }
 
     at (index: number, options?: {returnNode?: boolean}) : any {
