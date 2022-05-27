@@ -2,11 +2,7 @@ import { ListNode } from "./ListNode"
 import { AbstractLinkedList } from "./AbstractLinkedList"
 
 export class SingleLinkedList extends AbstractLinkedList {
-    constructor () {
-        super()
-    }
-
-    addToFront (data: any) : ListNode {
+    addToFront (data: any) : any {
         const new_node = new ListNode(data)
         
         if (this.size == 0) {
@@ -18,11 +14,9 @@ export class SingleLinkedList extends AbstractLinkedList {
         }
 
         this.incrementSize()
-
-        return new_node
     }
 
-    addToBack (data: any) : ListNode {
+    addToBack (data: any) : any {
         const new_node = new ListNode(data)
 
         if (this.size == 0) {
@@ -34,11 +28,30 @@ export class SingleLinkedList extends AbstractLinkedList {
         }
 
         this.incrementSize()
-
-        return new_node
     }
 
-    removeFromFront () : ListNode {
+    private rInsertAt (data: any, index: number) : void {
+        const new_node = new ListNode(data)
+        const prev_node = this.at(index - 1, {returnNode: true})
+        const next_node = this.at(index, {returnNode: true})
+
+        prev_node.next = new_node
+        new_node.next = next_node
+    }
+
+    insertAt(data: any, index: number): void {
+        this.checkIndexRange(index)
+
+        if (index == 0) {
+            return this.addToFront(data)
+        }
+        else (index > 0 && index < this.size - 1) {
+            return this.rInsertAt(data, index)
+        }
+        
+    }
+
+    removeFromFront () : any {
         const removed_node = this.head
         
         if (this.size == 0) {
@@ -54,10 +67,10 @@ export class SingleLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node
+        return removed_node.data
     }
 
-    removeFromBack () : ListNode {
+    removeFromBack () : any {
         const removed_node = this.tail
 
         if (this.size == 0) {
@@ -79,6 +92,6 @@ export class SingleLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node
+        return removed_node.data
     }
 }
