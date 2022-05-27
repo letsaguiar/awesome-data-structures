@@ -23,6 +23,10 @@ export class AbstractLinkedList {
         this.size -= 1
     }
 
+    returnData (node: ListNode, options: {returnNode? : boolean}) {
+        return options.returnNode ? node : node?.data
+    }
+
     addToFront (data: any) : void {
         throw new Error('Method not implemented')
     }
@@ -47,8 +51,31 @@ export class AbstractLinkedList {
         throw new Error('Method not implemented')
     }
 
+    find (data: any, options: {returnNode? : boolean}) : any {
+        let current_node = this.head
+        while (current_node != null) {
+            if (current_node.data == data) break
+            current_node = current_node.next
+        }
+
+        return this.returnData(current_node, options)
+    }
+
     findAndRemove (data: any) : any {
         throw new Error('Method not implemented')
+    }
+
+    at (index: number, options: {returnNode?: boolean}) : any {
+        if (index < 0 || index >= this.size) {
+            throw new Error('List index out of range')
+        }
+
+        let current_node = this.head
+        for (let i=0; i <= index; i++) {
+            current_node = current_node.next
+        }
+
+        return this.returnData(current_node, options)
     }
 
     toArray () : Array <any> {
