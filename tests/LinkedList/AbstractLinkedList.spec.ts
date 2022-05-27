@@ -157,6 +157,16 @@ describe('find functions', () => {
             full_list.at(3)
         }).toThrowError()
     })
+
+    test('find and remove', () => {
+        expect(() => {
+            full_list.findAndRemove(2)
+        }).toThrow('Method not implemented')
+
+        expect(() => {
+            full_list.findAndRemove(10)
+        }).toThrow('Element not found')
+    })
 })
 
 describe('implemented functions', () => {

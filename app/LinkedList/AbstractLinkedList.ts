@@ -103,7 +103,7 @@ export class AbstractLinkedList {
     findAndRemove (data: any) : any {
         const node_index = this.find(data, {returnIndex: true})
 
-        if (!node_index) {
+        if (node_index == -1) {
             throw new Error('Element not found!')
         }
 
