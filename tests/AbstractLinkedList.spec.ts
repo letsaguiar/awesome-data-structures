@@ -1,131 +1,182 @@
 import { AbstractLinkedList } from "../app/LinkedList/AbstractLinkedList";
 import { ListNode } from '../app/LinkedList/ListNode'
 
-describe('Size functions', () => {
-    test('Increment size', () => {
-        const new_list = new AbstractLinkedList()
-        new_list.incrementSize()
+let empty_list = new AbstractLinkedList()
+let full_list = new AbstractLinkedList()
 
-        expect(new_list.size).toBe(1)
+beforeEach(() => {
+    empty_list = new AbstractLinkedList()
+
+    const node1 = new ListNode(1)
+    const node2 = new ListNode(2)
+    const node3 = new ListNode(3)
+
+    node1.next = node2
+    node2.next = node3
+
+    full_list.head = node1
+    full_list.tail = node2
+    full_list.size = 3
+})
+
+describe('size functions', () => {
+    test('increment size', () => {
+        full_list.incrementSize()
+
+        expect(full_list.size).toBe(4)
     })
 
-    test('Decrement size', () => {
-        const new_list = new AbstractLinkedList()
-        new_list.incrementSize()
-        new_list.decrementSize()
+    test('decrement size', () => {
+        full_list.decrementSize()
 
-        expect(new_list.size).toBe(0)
+        expect(full_list.size).toBe(2)
     })
 
-    test('Decrement empty list size', () => {
-        const new_list = () => new AbstractLinkedList().decrementSize()
-
-        expect(new_list).toThrowError()
+    test('decrement size of an empty list', () => {
+        expect(() =>  {
+            empty_list.decrementSize()
+        }).toThrowError()
     })
 })
 
-describe('Implemented functions', () => {
-    test('Is empty is true', () => {
-        const new_list = new AbstractLinkedList()
-
-        expect(new_list.isEmpty()).toBe(true)
+describe('check index range', () => {
+    test('index is smaller than 0', () => {
+        expect(() => {
+            full_list.checkIndexRange(-1)
+        }).toThrowError()
     })
 
-    test('Is empty is false', () => {
-        const new_list = new AbstractLinkedList()
-        
-        const new_node = new ListNode(1)
-        new_list.head = new_node
-        new_list.tail = new_node
-        new_list.size = 1
+    test('index is equal or grater than size', () => {
+        expect(() => {
+            full_list.checkIndexRange(3)
+        }).toThrowError()
 
-        expect(new_list.isEmpty()).toBe(false)
+        expect(() => {
+            full_list.checkIndexRange(4)
+        }).toThrowError()
     })
 
-    test('Clear list', () => {
-        const new_list = new AbstractLinkedList()
-        
-        const new_node = new ListNode(1)
-        new_list.head = new_node
-        new_list.tail = new_node
-        new_list.size = 1
-
-        new_list.clear()
-
-        expect(new_list.isEmpty()).toBe(true)
-    })
-
-    test('Turn list into array', () => {
-        const new_list = new AbstractLinkedList()
-        
-        const node1 = new ListNode(1)
-        const node2 = new ListNode(2)
-        node1.next = node2
-
-        new_list.head = node1
-        new_list.tail = node2
-        new_list.size = 2
-
-        expect(new_list.toArray()).toStrictEqual([1, 2])
-    })
-
-    test('Check if the list contains an element', () => {
-        const new_list = new AbstractLinkedList()
-        
-        const node1 = new ListNode(1)
-        const node2 = new ListNode(2)
-        node1.next = node2
-
-        new_list.head = node1
-        new_list.tail = node2
-        new_list.size = 2
-
-        expect(new_list.contains(1)).toBe(true)
-        expect(new_list.contains(2)).toBe(true)
-        expect(new_list.contains(3)).toBe(false)
+    test('index is grater than zero and smaller than size', () => {
+        expect(() => {
+            full_list.checkIndexRange(1)
+        }).not.toThrowError()
     })
 })
 
-describe('Unimplemented functions', () => {
-    test('addToFront', () => {
-        const new_list = () => new AbstractLinkedList().addToFront(1)
+describe('check return options', () => {
+    test('return node is empty or false', () => {
+        const node4 = new ListNode(4)
+        
+        expect(full_list.checkReturnOptions(node4)).toBe(4)
 
-        expect(new_list).toThrowError()
+        expect(
+            full_list.checkReturnOptions(node4, {returnNode: false})
+        ).toBe(4)
     })
 
-    test('addToBack', () => {
-        const new_list = () => new AbstractLinkedList().addToBack(1)
-
-        expect(new_list).toThrowError()
+    test('return node is true', () => {
+        const node4 = new ListNode(4)
+        
+        expect(
+            full_list.checkReturnOptions(node4, {returnNode: true})
+        ).toStrictEqual(node4)
     })
 
-    test('insertAt', () => {
-        const new_list = () => new AbstractLinkedList().insertAt(1, 1)
+    test ('node is null or undefined', () => {
+        expect(
+            full_list.checkReturnOptions(null)
+        ).toBe(null)
 
-        expect(new_list).toThrowError()
+        expect(
+            full_list.checkReturnOptions(undefined)
+        ).toBe(null)
+    })
+})
+
+describe('not implemented functions', () => {
+    test('add to front', () => {
+        expect(() => {
+            empty_list.addToFront(1)
+        }).toThrowError()
     })
 
-    test('removeFromFront', () => {
-        const new_list = () => new AbstractLinkedList().removeFromFront()
-
-        expect(new_list).toThrowError()
+    test('add to back', () => {
+        expect(() => {
+            empty_list.addToBack(1)
+        }).toThrowError()
     })
 
-    test('removeFromBack', () => {
-        const new_list = () => new AbstractLinkedList().removeFromBack()
-
-        expect(new_list).toThrowError()
+    test('insert at', () => {
+        expect(() => {
+            empty_list.insertAt(1, 0)
+        }).toThrowError()
     })
 
-    test('deletAt', () => {
-        const new_list = () => new AbstractLinkedList().deleteAt(1)
-
-        expect(new_list).toThrowError()
+    test('remove from front', () => {
+        expect(() => {
+            empty_list.removeFromFront()
+        }).toThrowError()
     })
 
-    test('findAndRemove', () => {
-        const new_list = () => new AbstractLinkedList().findAndRemove(1)
+    test('remove from back', () => {
+        expect(() => {
+            empty_list.removeFromBack()
+        }).toThrowError()
+    })
 
-        expect(new_list).toThrowError()
+    test('delete at', () => {
+        expect(() => {
+            empty_list.deleteAt(0)
+        }).toThrowError()
+    })
+})
+
+describe('find functions', () => {
+    test('find options are empty or false', () => {
+        expect(full_list.find(1)).toBe(1)
+    })
+
+    test('find index is true', () => {
+        expect(full_list.find(1, {returnIndex: true})).toBe(0)
+    })
+
+    test('not found', () => {
+        expect(full_list.find(4)).toBe(null)
+    })
+
+    test('at range', () => {
+        expect(full_list.at(1)).toBe(2)
+    })
+
+    test('at out of range', () => {
+        expect(() => {
+            full_list.at(-1)
+        }).toThrowError()
+
+        expect(() => {
+            full_list.at(3)
+        }).toThrowError()
+    })
+})
+
+describe('implemented functions', () => {
+    test('to array', () => {
+        expect(full_list.toArray()).toStrictEqual([1, 2, 3])
+    })
+
+    test('contains', () => {
+        expect(full_list.contains(2)).toBe(true)
+        expect(full_list.contains(4)).toBe(false)
+    })
+
+    test('is empty', () => {
+        expect(empty_list.isEmpty()).toBe(true)
+        expect(full_list.isEmpty()).toBe(false)
+    })
+
+    test('clear', () => {
+        full_list.clear()
+
+        expect(full_list.isEmpty()).toBe(true)
     })
 })

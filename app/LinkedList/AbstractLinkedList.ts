@@ -29,12 +29,12 @@ export class AbstractLinkedList {
         }
     }
 
-    checkReturnOptions (node: ListNode, options: {returnNode? : boolean}) {
+    checkReturnOptions (node: ListNode, options?: {returnNode? : boolean}) {
 
-        if (node && !options.returnNode) {
+        if (node && !options?.returnNode) {
             return node.data
         } 
-        else if (node && options.returnNode) {
+        else if (node && options?.returnNode) {
             return node
         }
         else {
@@ -114,7 +114,7 @@ export class AbstractLinkedList {
         this.checkIndexRange(index)
 
         let current_node = this.head
-        for (let i=0; i <= index; i++) {
+        for (let i=0; i < index; i++) {
             current_node = current_node.next
         }
 
@@ -134,14 +134,8 @@ export class AbstractLinkedList {
     }
 
     contains (data: any) : boolean {
-        let current_node = this.head
-
-        while (current_node != null) {
-            if (current_node.data == data) break
-            current_node = current_node.next
-        }
-
-        return current_node ? true : false
+        const node = this.find(data)
+        return node ? true : false
     }
 
     isEmpty () : boolean {
