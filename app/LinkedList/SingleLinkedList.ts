@@ -45,7 +45,7 @@ export class SingleLinkedList extends AbstractLinkedList {
         if (index == 0) {
             return this.addToFront(data)
         }
-        else (index > 0 && index < this.size - 1) {
+        else {
             return this.rInsertAt(data, index)
         }
         
@@ -93,5 +93,30 @@ export class SingleLinkedList extends AbstractLinkedList {
         this.decrementSize()
 
         return removed_node.data
+    }
+
+    private rDeleteAt (index: number) : any {
+        const removed_node = this.at(index, {returnNode: true})
+        const prev_node = this.at(index - 1, {returnNode: true})
+        const next_node = this.at(index + 1, {returnNode: true})
+
+        prev_node.next = next_node
+
+        return removed_node.data
+    }
+
+    deleteAt(index: number) : any {
+        this.checkIndexRange(index)
+
+        if (index == 0) {
+            return this.removeFromFront()
+        }
+        else if (index == this.size - 1) {
+            return this.removeFromBack()
+        }
+        else {
+            return this.rDeleteAt(index)
+        }
+
     }
 }
