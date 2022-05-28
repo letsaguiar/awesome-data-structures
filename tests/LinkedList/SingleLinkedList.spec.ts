@@ -1,155 +1,129 @@
 import { SingleLinkedList } from "../../app/LinkedList/SingleLinkedList";
 
-describe('Add to list', () => {
-    test('Create a new cleaned list', () => {
-        const new_list = new SingleLinkedList()
+let empty_list = new SingleLinkedList()
+let full_list = new SingleLinkedList()
 
-        expect(new_list.size).toBe(0)
-        expect(new_list.head).toBe(null)
-        expect(new_list.tail).toBe(null)
+beforeEach(() => {
+    empty_list = new SingleLinkedList()
+    full_list = new SingleLinkedList()
+
+    full_list.addToBack(1)
+    full_list.addToBack(2)
+    full_list.addToBack(3)
+})
+
+describe('add functions', () => {
+    test('add to front', () => {
+        full_list.addToFront(4)
+
+        expect(full_list.size).toBe(4)
+        expect(full_list.head.data).toBe(4)
+        expect(full_list.tail.data).toBe(3)
     })
 
-    test ('Adds an element to front of the list', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToFront(1)
+    test('add to back', () => {
+        full_list.addToBack(4)
 
-        expect(new_list.size).toBe(1)
-        expect(new_list.head.data).toBe(1)
-        expect(new_list.tail.data).toBe(1)
+        expect(full_list.size).toBe(4)
+        expect(full_list.head.data).toBe(1)
+        expect(full_list.tail.data).toBe(4)
     })
 
-    test ('Adds two elements to front of the list', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToFront(1)
-        new_list.addToFront(2)
-
-        expect(new_list.size).toBe(2)
-        expect(new_list.head.data).toBe(2)
-        expect(new_list.tail.data).toBe(1)
+    test('insert at out of range', () => {
+        expect(() => {
+            full_list.insertAt(4, 3)
+        }).toThrowError()
     })
 
-    test ('Adds three elements to front of the list', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToFront(1)
-        new_list.addToFront(2)
-        new_list.addToFront(3)
+    test('insert at 0', () => {
+        full_list.insertAt(4, 0)
 
-        expect(new_list.size).toBe(3)
-        expect(new_list.head.data).toBe(3)
-        expect(new_list.tail.data).toBe(1)
+        expect(full_list.size).toBe(4)
+        expect(full_list.head.data).toBe(4)
+        expect(full_list.tail.data).toBe(3)
     })
 
-    test ('Adds an element to back of the list', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack(1)
+    test('insert at range', () => {
+        full_list.insertAt(4, 1)
 
-        expect(new_list.size).toBe(1)
-        expect(new_list.head.data).toBe(1)
-        expect(new_list.tail.data).toBe(1)
-    })
-
-    test ('Adds two elements to back of the list', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack(1)
-        new_list.addToBack(2)
-
-        expect(new_list.size).toBe(2)
-        expect(new_list.head.data).toBe(1)
-        expect(new_list.tail.data).toBe(2)
-    })
-
-    test ('Adds three elements to back of the list', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack(1)
-        new_list.addToBack(2)
-        new_list.addToBack(3)
-
-        expect(new_list.size).toBe(3)
-        expect(new_list.head.data).toBe(1)
-        expect(new_list.tail.data).toBe(3)
+        expect(full_list.size).toBe(4)
+        expect(full_list.head.data).toBe(1)
+        expect(full_list.tail.data).toBe(3)
     })
 })
 
-describe('Remove from list', () => {
-    test('Remove from front with zero element', () => {
-        const new_list = () => new SingleLinkedList().removeFromFront()
+describe('remove functions', () => {
+    test('remove from an empty list', () => {
+        expect(() => {
+            empty_list.removeFromFront()
+        }).toThrowError()
 
-        expect(new_list).toThrowError()
+        expect(() => {
+            empty_list.removeFromBack()
+        }).toThrowError()
     })
 
-    test('Remove from front with one element', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack (1)
-        new_list.removeFromFront()
+    test('remove from front', () => {
+        full_list.removeFromFront()
 
-        expect(new_list.size).toBe(0)
-        expect(new_list.head).toBe(null)
-        expect(new_list.tail).toBe(null)
+        expect(full_list.size).toBe(2)
+        expect(full_list.head.data).toBe(2)
+        expect(full_list.tail.data).toBe(3)
     })
 
-    test('Remove from front with two elements', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack (1)
-        new_list.addToBack (2)
+    test('remove from front with one element', () => {
+        empty_list.addToBack(1)
+        empty_list.removeFromFront()
 
-        new_list.removeFromFront()
-
-        expect(new_list.size).toBe(1)
-        expect(new_list.head.data).toBe(2)
-        expect(new_list.tail.data).toBe(2)
+        expect(empty_list.size).toBe(0)
+        expect(empty_list.head?.data).toBe(undefined)
+        expect(empty_list.tail?.data).toBe(undefined)
     })
 
-    test('Remove from front with 3 elements', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack (1)
-        new_list.addToBack (2)
-        new_list.addToBack (3)
+    test('remove from back', () => {
+        full_list.removeFromBack()
 
-        new_list.removeFromFront()
-
-        expect(new_list.size).toBe(2)
-        expect(new_list.head.data).toBe(2)
-        expect(new_list.tail.data).toBe(3)
+        expect(full_list.size).toBe(2)
+        expect(full_list.head.data).toBe(1)
+        expect(full_list.tail.data).toBe(2)
     })
 
-    test('Remove from back with zero element', () => {
-        const new_list = () => new SingleLinkedList().removeFromBack()
+    test('remove from back with one element', () => {
+        empty_list.addToBack(1)
+        empty_list.removeFromBack()
 
-        expect(new_list).toThrowError()
+        expect(empty_list.size).toBe(0)
+        expect(empty_list.head?.data).toBe(undefined)
+        expect(empty_list.tail?.data).toBe(undefined)
     })
 
-    test('Remove from front with one element', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack (1)
-        new_list.removeFromBack()
-
-        expect(new_list.size).toBe(0)
-        expect(new_list.head).toBe(null)
-        expect(new_list.tail).toBe(null)
+    test('delet at out of range', () => {
+        expect(() => {
+            full_list.deleteAt(3)
+        }).toThrowError()
     })
 
-    test('Remove from back with two elements', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack (1)
-        new_list.addToBack (2)
+    test('delete at 0', () => {
+        full_list.deleteAt(0)
 
-        new_list.removeFromBack()
-
-        expect(new_list.size).toBe(1)
-        expect(new_list.head.data).toBe(1)
-        expect(new_list.tail.data).toBe(1)
+        expect(full_list.size).toBe(2)
+        expect(full_list.head.data).toBe(2)
+        expect(full_list.tail.data).toBe(3)
     })
 
-    test('Remove from back with 3 elements', () => {
-        const new_list = new SingleLinkedList()
-        new_list.addToBack (1)
-        new_list.addToBack (2)
-        new_list.addToBack (3)
+    test('delete at size - 1', () => {
+        full_list.deleteAt(2)
 
-        new_list.removeFromBack()
+        expect(full_list.size).toBe(2)
+        expect(full_list.head.data).toBe(1)
+        expect(full_list.tail.data).toBe(2)
+    })
 
-        expect(new_list.size).toBe(2)
-        expect(new_list.head.data).toBe(1)
-        expect(new_list.tail.data).toBe(2)
+    test('delete at range', () => {
+        full_list.deleteAt(1)
+
+        expect(full_list.size).toBe(2)
+        expect(full_list.head.data).toBe(1)
+        expect(full_list.tail.data).toBe(3)
     })
 })

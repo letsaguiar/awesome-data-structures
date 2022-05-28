@@ -37,6 +37,8 @@ export class SingleLinkedList extends AbstractLinkedList {
 
         prev_node.next = new_node
         new_node.next = next_node
+
+        this.incrementSize()
     }
 
     insertAt(data: any, index: number): void {
@@ -101,6 +103,8 @@ export class SingleLinkedList extends AbstractLinkedList {
         const next_node = this.at(index + 1, {returnNode: true})
 
         prev_node.next = next_node
+
+        this.decrementSize()
 
         return removed_node.data
     }
