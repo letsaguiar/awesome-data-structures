@@ -10,6 +10,6 @@ export class Queue extends SingleLinkedList {
     }
 
     peek () {
-        return this.head
+        return this.head?.data
     }
 }
