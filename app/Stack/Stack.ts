@@ -6,14 +6,14 @@ export class Stack extends SingleLinkedList{
     }
 
     push (data: any) {
-        this.addToFront(data)
+        return this.addToFront(data)
     }
 
     pop () {
-        this.removeFromFront()
+        return this.removeFromFront()
     }
 
     peek () {
-        return this.head
+        return this.head?.data
     }
 }
