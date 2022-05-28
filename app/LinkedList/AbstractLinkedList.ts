@@ -31,10 +31,10 @@ export class AbstractLinkedList {
 
     checkReturnOptions (node: ListNode, options?: {returnNode? : boolean}) {
 
-        if (node && !options?.returnNode) {
+        if (node && (!options || !options.returnNode)) {
             return node.data
         } 
-        else if (node && options?.returnNode) {
+        else if (node && options && options.returnNode) {
             return node
         }
         else {

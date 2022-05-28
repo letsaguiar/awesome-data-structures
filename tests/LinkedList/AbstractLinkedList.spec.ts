@@ -64,7 +64,7 @@ describe('check index range', () => {
 })
 
 describe('check return options', () => {
-    test('return node is empty or false', () => {
+    test('return node option is empty or false', () => {
         const node4 = new ListNode(4)
         
         expect(full_list.checkReturnOptions(node4)).toBe(4)
@@ -74,7 +74,7 @@ describe('check return options', () => {
         ).toBe(4)
     })
 
-    test('return node is true', () => {
+    test('return node option is true', () => {
         const node4 = new ListNode(4)
         
         expect(
