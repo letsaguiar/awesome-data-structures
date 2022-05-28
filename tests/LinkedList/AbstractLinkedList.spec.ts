@@ -168,3 +168,25 @@ describe('find functions', () => {
         }).toThrow('Element not found')
     })
 })
+
+describe('implemented functions', () => {
+    test('to array', () => {
+        expect(full_list.toArray()).toStrictEqual([1, 2, 3])
+    })
+
+    test('contains', () => {
+        expect(full_list.contains(2)).toBe(true)
+        expect(full_list.contains(4)).toBe(false)
+    })
+
+    test('is empty', () => {
+        expect(empty_list.isEmpty()).toBe(true)
+        expect(full_list.isEmpty()).toBe(false)
+    })
+
+    test('clear', () => {
+        full_list.clear()
+
+        expect(full_list.isEmpty()).toBe(true)
+    })
+})
