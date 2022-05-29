@@ -51,9 +51,6 @@ export class DoublyLinkedList extends AbstractLinkedList {
         if (index == 0) {
             return this.addToFront(data)
         }
-        else if (index == this.size - 1) {
-            return this.addToBack(data)
-        }
         else {
             return this.rInsertAt(data, index)
         }
