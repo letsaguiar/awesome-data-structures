@@ -67,7 +67,7 @@ export class AbstractLinkedList {
         throw new Error('Method not implemented')
     }
 
-    private findAndReturnData (data: any, options?: {returnNode? : boolean}) : any {
+    findAndReturnData (data: any, options?: {returnNode? : boolean}) : any {
         let current_node = this.head
         while (current_node != null) {
             if (current_node.data == data) break
@@ -77,7 +77,7 @@ export class AbstractLinkedList {
         return this.checkReturnOptions(current_node, options)
     }
 
-    private findAndReturnIndex (data: any) : number {
+    findAndReturnIndex (data: any) : number {
         let current_node = this.head
         let index = 0
         while (current_node != null) {
