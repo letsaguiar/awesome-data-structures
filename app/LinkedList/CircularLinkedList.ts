@@ -7,6 +7,7 @@ export class CircularLinkedList extends AbstractLinkedList {
 
         if (this.size == 0) {
             this.tail = new_node
+            this.tail.next = new_node
         }
         else if (this.size == 1) {
             this.tail.next = new_node
@@ -25,6 +26,7 @@ export class CircularLinkedList extends AbstractLinkedList {
 
         if (this.size == 0) {
             this.tail = new_node
+            this.tail.next = new_node
         }
         else if (this.size == 1) {
             this.tail.next = new_node
@@ -63,7 +65,7 @@ export class CircularLinkedList extends AbstractLinkedList {
     }
 
     removeFromFront () {
-        const removed_node = this.tail.next
+        const removed_node = this.tail?.next ?? this.tail
 
         if (this.size == 0) {
             throw new Error("Can't remove from empty list")
@@ -91,11 +93,13 @@ export class CircularLinkedList extends AbstractLinkedList {
         }
         else {
             let current_node = this.tail.next
-            while(current_node.next != this.tail) {
+
+            do {
                 current_node = current_node.next
-            }
+            } while (current_node.next != this.tail)
 
             current_node.next = this.tail.next
+            this.tail = current_node
         }
 
         this.decrementSize()
@@ -130,27 +134,30 @@ export class CircularLinkedList extends AbstractLinkedList {
     }
 
     findAndReturnData (data: any, options?: {returnNode? : boolean}) : any {
-        let current_node = this.tail
-        
+        let current_node = this.tail.next
+
         do {
             if (current_node.data == data) break
             current_node = current_node.next
-        } while (current_node != this.tail)
-        
+        } while (current_node != this.tail.next)
+
+        if (current_node.data != data) current_node.data = null
+
         return this.checkReturnOptions(current_node, options)
     }
 
     findAndReturnIndex (data: any) : number {
-        let current_node = this.head
+        let current_node = this.tail.next
         let index = 0
 
         do {
             if (current_node.data == data) break
-            current_node = current_node.next
-            index += 1
-        } while (current_node != this.tail)
 
-        return current_node ? index : -1
+            current_node = current_node.next
+            index = index + 1
+        } while (current_node != this.tail.next)
+
+        return current_node.data == data ? index : -1
     }
 
     at (index: number, options?: {returnNode?: boolean}) : any {
@@ -168,10 +175,10 @@ export class CircularLinkedList extends AbstractLinkedList {
         let current_node = this.tail.next
         const array = []
 
-        while (current_node != null) {
+        do {
             array.push(current_node.data)
             current_node = current_node.next
-        }
+        } while (current_node != this.tail.next)
 
         return array
     }
