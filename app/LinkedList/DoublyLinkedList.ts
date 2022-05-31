@@ -77,7 +77,7 @@ export class DoublyLinkedList extends AbstractLinkedList {
     }
 
     removeFromBack () {
-        const removed_node = this.head
+        const removed_node = this.tail
 
         if (this.size == 0) {
             throw new Error("Can't remove from empty list")
