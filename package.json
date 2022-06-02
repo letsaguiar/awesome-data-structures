@@ -2,7 +2,7 @@
   "name": "js-data-structures",
   "version": "1.0.0",
   "description": "An npm package that gathers all the major algorithms and data structures",
-  "main": "index.js",
+  "main": "index.ts",
   "directories": {
     "test": "tests"
   },
