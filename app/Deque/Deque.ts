@@ -1,27 +1,37 @@
 import { DoublyLinkedList } from '..//LinkedList/DoublyLinkedList'
 
-export class Deque extends DoublyLinkedList {
+export class Deque {
+    private list: DoublyLinkedList
+
+    constructor () {
+        this.list = new DoublyLinkedList()
+    }
+
+    get size () {
+        return this.list.size
+    }
+
     get begin () {
-        return this.head?.data ?? null
+        return this.list.head?.data || null
     }
 
     get end () {
-        return this.tail?.data ?? null
+        return this.list.tail?.data || null
     }
 
     push_front (data: any) : void {
-        return this.addToFront(data)
+        return this.list.addToFront(data)
     }
 
     push_back (data: any) : void {
-        return this.addToBack(data)
+        return this.list.addToBack(data)
     }
 
     pop_front () : any {
-        return this.removeFromFront()
+        return this.list.removeFromFront()
     }
 
     pop_back () : any {
-        return this.removeFromBack()
+        return this.list.removeFromBack()
     }
 }

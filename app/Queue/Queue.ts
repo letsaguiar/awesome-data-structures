@@ -1,15 +1,29 @@
 import { SingleLinkedList } from "../LinkedList/SingleLinkedList";
 
-export class Queue extends SingleLinkedList {
+export class Queue {
+    private list: SingleLinkedList
+    
+    constructor () {
+        this.list = new SingleLinkedList()
+    }
+
+    get size () {
+        return this.list.size
+    }
+
+    get begin () {
+        return this.list.head?.data || null
+    }
+
+    get end () {
+        return this.list.tail?.data || null
+    }
+
     enqueue (data: any) {
-        return this.addToBack(data)
+        return this.list.addToBack(data)
     }
 
     dequeue () {
-        return this.removeFromFront()
-    }
-
-    peek () {
-        return this.head?.data
+        return this.list.removeFromFront()
     }
 }
