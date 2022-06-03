@@ -23,7 +23,7 @@ export class AbstractLinkedList {
         this.size -= 1
     }
 
-    checkIndexRange (index) {
+    checkIndexRange (index: number) {
         if (index < 0 || index >= this.size) {
             throw new Error('Index Out Of Range')
         }
