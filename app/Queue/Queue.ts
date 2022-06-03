@@ -7,7 +7,6 @@ export class Queue {
         this.list = new SingleLinkedList()
     }
 
-
     get size () {
         return this.list.size
     }
