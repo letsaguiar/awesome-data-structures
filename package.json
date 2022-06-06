@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test-coverage": "jest --collectCoverage",
+    "test-coverage": "jest --coverage",
     "build": "tsc"
   },
   "author": "Letícia Aguiar",
