@@ -34,4 +34,14 @@ export class Deque {
     pop_back () : any {
         return this.list.removeFromBack()
     }
+
+    isEmpty () {
+        return this.size == 0 && this.end == null && this.begin == null
+    }
+
+    clear () {
+        this.list.head = null
+        this.list.tail = null
+        this.list.size = 0
+    }
 }

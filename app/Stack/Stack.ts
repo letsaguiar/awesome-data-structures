@@ -26,4 +26,14 @@ export class Stack{
     pop () {
         return this.list.removeFromFront()
     }
+
+    isEmpty () {
+        return this.size == 0 && this.end == null && this.begin == null
+    }
+
+    clear () {
+        this.list.head = null
+        this.list.tail = null
+        this.list.size = 0
+    }
 }

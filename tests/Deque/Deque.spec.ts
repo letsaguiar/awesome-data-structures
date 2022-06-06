@@ -12,14 +12,16 @@ beforeEach(() => {
     full_deque.push_back(3)
 })
 
-describe('deque operations', () => {
-    test('create an empty deque', () => {
+describe('creates an empty deque', () => {
+    test('creates an empty deque', () => {
         expect(empty_deque).toBeDefined()
         expect(empty_deque.size).toBe(0)
         expect(empty_deque.begin).toBe(null)
         expect(empty_deque.end).toBe(null)
     })
+})
 
+describe('add operations', () => {
     test('push front one element', () => {
         empty_deque.push_front(1)
         expect(empty_deque.size).toBe(1)
@@ -43,7 +45,9 @@ describe('deque operations', () => {
         expect(full_deque.begin).toBe(1)
         expect(full_deque.end).toBe(4)
     })
+})
 
+describe('remove operations', () => {
     test('pop an empty list', () => {
         expect(() => {
             empty_deque.pop_front()
@@ -67,9 +71,36 @@ describe('deque operations', () => {
         expect(full_deque.begin).toBe(1)
         expect(full_deque.end).toBe(2)
     })
+})
 
-    test('check begin and end', () => {
+describe('clear functions', () => {
+    test('clear a deque', () => {
+        full_deque.clear()
+
+        expect(full_deque.size).toBe(0)
+        expect(full_deque.begin).toBe(null)
+        expect(full_deque.end).toBe(null)
+    })
+
+    test('check if a deque is empty', () => {
+        expect(full_deque.isEmpty()).toBe(false)
+        expect(empty_deque.isEmpty()).toBe(true)
+    })
+})
+
+describe('getters and setters', () => {
+    test('begin', () => {
         expect(full_deque.begin).toBe(1)
+        expect(empty_deque.begin).toBe(null)
+    })
+
+    test('end', () => {
         expect(full_deque.end).toBe(3)
+        expect(empty_deque.end).toBe(null)
+    })
+
+    test('size', () => {
+        expect(full_deque.size).toBe(3)
+        expect(empty_deque.size).toBe(0)
     })
 })
