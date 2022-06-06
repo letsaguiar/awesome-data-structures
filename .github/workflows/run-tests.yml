@@ -8,5 +8,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '17'
-      - run: npm install
-      - run: npm run test-coverage
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests and collect coverage
+        run: npm run test-coverage
+
+      - name: Upload coverage reports to codecov
+        uses: codecov/codecov-action@v3
