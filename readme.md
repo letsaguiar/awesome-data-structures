@@ -19,13 +19,11 @@
     </a>
 </p>
 
-<p align="center">
-    <img src="logo-readme.png">
-</p>
-
 ## About The Project
 
-Awesome Data Structures is an npm package that brings together all tha main ready-to-use data structures. It's lightweight, it's performative and has no dependencies. With this package, you can build efficient applications, using the right data structures, or learn more about complexity, algorithms and data structures by reading our documentation.
+Awesome Data Structures is an npm package that brings together all tha main ready-to-use data structures. It's lightweight, it's performative and has no dependencies.
+
+With this package, you can build efficient applications, using the right data structures, or learn more about complexity, algorithms and data structures by reading our documentation.
 
 ## Getting Started
 
@@ -39,21 +37,13 @@ npm install awesome-data-structures
 
 ### Usage
 ```
-import { SingleLinkedList } from 'awesome-data-structures'
+import { SinglyLinkedList } from 'awesome-data-structures'
 
-const list = new SingleLinkedList()
+const list = new SinglyLinkedList()
 ```
 
 ## Documentation
-Creating efficient applications is mostly about choosing the best data structure. All data structures are efficient for certain tasks and inefficient for the others. Always choose the best one thinking about the tasks you need to perform.
-
-### LinkedLists
-
-### Stack
-
-### Queue
-
-### Deque
+Please check our docs by [clicking here](https://github.com/letsaguiar/awesome-data-structures/wiki)
 
 ## Contributing
 We want this package to be as useful, robust and scalable as possible. We're always maintaining it and adding new features, so feel free to open issues and pull requests. **Any help is welcome**.
@@ -69,6 +59,3 @@ If you have a suggestion that would make this better, please fork the repo and c
 ## License
 
 Distributed under the MIT License. [Click here](LICENSE.md) for more information.
-
-## Acknowledgments
-[Best README Template](https://github.com/othneildrew/Best-README-Template)
