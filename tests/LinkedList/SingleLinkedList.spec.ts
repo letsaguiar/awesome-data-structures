@@ -1,11 +1,11 @@
-import { SingleLinkedList } from "../../app/LinkedList/SingleLinkedList";
+import { SinglyLinkedList } from "../../app/LinkedList/SinglyLinkedList";
 
-let empty_list = new SingleLinkedList()
-let full_list = new SingleLinkedList()
+let empty_list = new SinglyLinkedList()
+let full_list = new SinglyLinkedList()
 
 beforeEach(() => {
-    empty_list = new SingleLinkedList()
-    full_list = new SingleLinkedList()
+    empty_list = new SinglyLinkedList()
+    full_list = new SinglyLinkedList()
 
     full_list.addToBack(1)
     full_list.addToBack(2)

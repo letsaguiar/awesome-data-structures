@@ -1,4 +1,4 @@
-import { SingleLinkedList } from './app/LinkedList/SingleLinkedList'
+import { SinglyLinkedList } from './app/LinkedList/SinglyLinkedList'
 import { DoublyLinkedList } from './app/LinkedList/DoublyLinkedList'
 import { CircularLinkedList } from './app/LinkedList/CircularLinkedList'
 import { Queue } from './app/Queue/Queue'
@@ -6,7 +6,7 @@ import { Stack } from './app/Stack/Stack'
 import { Deque } from './app/Deque/Deque'
 
 export {
-    SingleLinkedList,
+    SinglyLinkedList,
     DoublyLinkedList,
     CircularLinkedList,
     Queue,

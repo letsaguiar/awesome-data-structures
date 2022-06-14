@@ -1,10 +1,10 @@
-import { SingleLinkedList } from "../LinkedList/SingleLinkedList";
+import { SinglyLinkedList } from "../LinkedList/SinglyLinkedList";
 
 export class Queue {
-    private list: SingleLinkedList
+    private list: SinglyLinkedList
     
     constructor () {
-        this.list = new SingleLinkedList()
+        this.list = new SinglyLinkedList()
     }
 
     get size () {

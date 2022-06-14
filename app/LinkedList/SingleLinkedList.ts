@@ -1,7 +1,7 @@
 import { ListNode } from "./ListNode"
 import { AbstractLinkedList } from "./AbstractLinkedList"
 
-export class SingleLinkedList extends AbstractLinkedList {
+export class SinglyLinkedList extends AbstractLinkedList {
     addToFront (data: any) : any {
         const new_node = new ListNode(data)
         
