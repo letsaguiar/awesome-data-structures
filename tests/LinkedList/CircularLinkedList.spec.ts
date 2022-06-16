@@ -153,7 +153,7 @@ describe('find functions', () => {
     })
 
     test('not found', () => {
-        expect(full_list.find(4)).toBe(null)
+        expect(full_list.find(4)).toBe(undefined)
     })
 
     test('at range', () => {

@@ -80,7 +80,7 @@ export class AbstractLinkedList {
         throw new Error('Method not implemented')
     }
 
-    private findIndex (data: any) : number {
+    findIndex (data: any) : number {
         let current_node = this.head
         let index = 0
 
