@@ -1,4 +1,5 @@
 import { ListNode } from "./ListNode"
+import { ListBasedReturnOptionsDto } from "../../config/ReturnOptions"
 
 export class AbstractLinkedList {
     public head: ListNode
@@ -11,11 +12,11 @@ export class AbstractLinkedList {
         this.size = 0
     }
 
-    incrementSize () {
+    incrementSize () : void {
         this.size += 1
     }
 
-    decrementSize () {
+    decrementSize () : void {
         if (this.size == 0) {
             throw new Error ("Can't decrement empty list size")
         }
@@ -23,24 +24,36 @@ export class AbstractLinkedList {
         this.size -= 1
     }
 
-    checkIndexRange (index: number) {
+    checkIndexRange (index: number) : void {
         if (index < 0 || index >= this.size) {
             throw new Error('Index Out Of Range')
         }
     }
 
-    checkReturnOptions (node: ListNode, options?: {returnNode? : boolean}) {
+    returnOptions(node: ListNode, returnOptions?: ListBasedReturnOptionsDto) : any {
 
-        if (node && (!options || !options.returnNode)) {
-            return node.data
-        } 
-        else if (node && options && options.returnNode) {
-            return node
+        if (returnOptions?.returnNode) {
+            return this.returnNode(node)
+        }
+        else if (returnOptions?.returnIndex) {
+            return this.returnIndex(node)
         }
         else {
-            return null
+            return this.returnData(node)
         }
 
+    }
+
+    private returnNode (node: ListNode) : ListNode {
+        return node;
+    }
+
+    private returnIndex (node: ListNode) : Number {
+        return this.findIndex(node?.data);
+    }
+
+    private returnData (node: ListNode) : any {
+        return node?.data;
     }
 
     addToFront (data: any) : void {
@@ -55,62 +68,55 @@ export class AbstractLinkedList {
         throw new Error('Method not implemented')
     }
 
-    removeFromFront () : any {
+    removeFromFront (returnOptions?: ListBasedReturnOptionsDto) : any {
         throw new Error('Method not implemented')
     }
 
-    removeFromBack () : any {
+    removeFromBack (returnOptions?: ListBasedReturnOptionsDto) : any {
         throw new Error('Method not implemented')
     }
 
-    deleteAt (index: number) : any {
+    deleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) : any {
         throw new Error('Method not implemented')
     }
 
-    findAndReturnData (data: any, options?: {returnNode? : boolean}) : any {
-        let current_node = this.head
-        while (current_node != null) {
-            if (current_node.data == data) break
-            current_node = current_node.next
-        }
-
-        return this.checkReturnOptions(current_node, options)
-    }
-
-    findAndReturnIndex (data: any) : number {
+    private findIndex (data: any) : number {
         let current_node = this.head
         let index = 0
+
         while (current_node != null) {
             if (current_node.data == data) break
+
             current_node = current_node.next
-            index += 1
+            index = index + 1
         }
 
-        return current_node ? index : -1
+        return current_node != null ? index : -1
     }
 
-    find (data: any, options?: {returnNode?: boolean, returnIndex?: boolean}) {
-        
-        if (options?.returnIndex) {
-            return this.findAndReturnIndex(data)
-        }
-        else {
-            return this.findAndReturnData(data, options)
+    find (data: any, returnOptions?: ListBasedReturnOptionsDto) {
+        let current_node = this.head
+
+        while (current_node != null) {
+            if (current_node.data == data) break
+
+            current_node = current_node.next
         }
 
+        return this.returnOptions(current_node, returnOptions)
     }
 
-    findAndRemove (data: any) : any {
+    findAndRemove (data: any, returnOptions?: ListBasedReturnOptionsDto) {
         const node_index = this.find(data, {returnIndex: true})
 
         if (node_index == -1) {
             throw new Error('Element not found!')
         }
 
-        return this.deleteAt(node_index)
+        return this.deleteAt(node_index, returnOptions)
     }
 
-    at (index: number, options?: {returnNode?: boolean}) : any {
+    at (index: number, returnOptions?: ListBasedReturnOptionsDto) : any {
         this.checkIndexRange(index)
 
         let current_node = this.head
@@ -118,7 +124,7 @@ export class AbstractLinkedList {
             current_node = current_node.next
         }
 
-        return this.checkReturnOptions(current_node, options)
+        return this.returnOptions(current_node, returnOptions)
     }
 
     toArray () : Array <any> {
