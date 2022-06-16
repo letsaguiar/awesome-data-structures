@@ -15,35 +15,35 @@ beforeEach(() => {
 describe('creates an empty deque', () => {
     test('creates an empty deque', () => {
         expect(empty_deque).toBeDefined()
-        expect(empty_deque.size).toBe(0)
-        expect(empty_deque.begin).toBe(null)
-        expect(empty_deque.end).toBe(null)
+        expect(empty_deque.size()).toBe(0)
+        expect(empty_deque.begin()).toBe(undefined)
+        expect(empty_deque.end()).toBe(undefined)
     })
 })
 
 describe('add operations', () => {
     test('push front one element', () => {
         empty_deque.push_front(1)
-        expect(empty_deque.size).toBe(1)
-        expect(empty_deque.begin).toBe(1)
-        expect(empty_deque.end).toBe(1)
+        expect(empty_deque.size()).toBe(1)
+        expect(empty_deque.begin()).toBe(1)
+        expect(empty_deque.end()).toBe(1)
 
         full_deque.push_front(4)
-        expect(full_deque.size).toBe(4)
-        expect(full_deque.begin).toBe(4)
-        expect(full_deque.end).toBe(3)
+        expect(full_deque.size()).toBe(4)
+        expect(full_deque.begin()).toBe(4)
+        expect(full_deque.end()).toBe(3)
     })
 
     test('push back one element', () => {
         empty_deque.push_back(1)
-        expect(empty_deque.size).toBe(1)
-        expect(empty_deque.begin).toBe(1)
-        expect(empty_deque.end).toBe(1)
+        expect(empty_deque.size()).toBe(1)
+        expect(empty_deque.begin()).toBe(1)
+        expect(empty_deque.end()).toBe(1)
 
         full_deque.push_back(4)
-        expect(full_deque.size).toBe(4)
-        expect(full_deque.begin).toBe(1)
-        expect(full_deque.end).toBe(4)
+        expect(full_deque.size()).toBe(4)
+        expect(full_deque.begin()).toBe(1)
+        expect(full_deque.end()).toBe(4)
     })
 })
 
@@ -60,16 +60,16 @@ describe('remove operations', () => {
 
     test('pop front one element', () => {
         expect(full_deque.pop_front()).toBe(1)
-        expect(full_deque.size).toBe(2)
-        expect(full_deque.begin).toBe(2)
-        expect(full_deque.end).toBe(3)
+        expect(full_deque.size()).toBe(2)
+        expect(full_deque.begin()).toBe(2)
+        expect(full_deque.end()).toBe(3)
     })
 
     test('pop back one element', () => {
         expect(full_deque.pop_back()).toBe(3)
-        expect(full_deque.size).toBe(2)
-        expect(full_deque.begin).toBe(1)
-        expect(full_deque.end).toBe(2)
+        expect(full_deque.size()).toBe(2)
+        expect(full_deque.begin()).toBe(1)
+        expect(full_deque.end()).toBe(2)
     })
 })
 
@@ -77,9 +77,9 @@ describe('clear functions', () => {
     test('clear a deque', () => {
         full_deque.clear()
 
-        expect(full_deque.size).toBe(0)
-        expect(full_deque.begin).toBe(null)
-        expect(full_deque.end).toBe(null)
+        expect(full_deque.size()).toBe(0)
+        expect(full_deque.begin()).toBe(undefined)
+        expect(full_deque.end()).toBe(undefined)
     })
 
     test('check if a deque is empty', () => {
@@ -89,18 +89,18 @@ describe('clear functions', () => {
 })
 
 describe('getters and setters', () => {
-    test('begin', () => {
-        expect(full_deque.begin).toBe(1)
-        expect(empty_deque.begin).toBe(null)
+    test('begin()', () => {
+        expect(full_deque.begin()).toBe(1)
+        expect(empty_deque.begin()).toBe(undefined)
     })
 
-    test('end', () => {
-        expect(full_deque.end).toBe(3)
-        expect(empty_deque.end).toBe(null)
+    test('end()', () => {
+        expect(full_deque.end()).toBe(3)
+        expect(empty_deque.end()).toBe(undefined)
     })
 
-    test('size', () => {
-        expect(full_deque.size).toBe(3)
-        expect(empty_deque.size).toBe(0)
+    test('size()', () => {
+        expect(full_deque.size()).toBe(3)
+        expect(empty_deque.size()).toBe(0)
     })
 })
