@@ -1,5 +1,6 @@
 import { AbstractLinkedList } from "./AbstractLinkedList";
 import { ListNode } from "./ListNode";
+import { ListBasedReturnOptionsDto } from "../../config/ReturnOptions";
 
 export class CircularLinkedList extends AbstractLinkedList {
     addToFront(data: any): void {
@@ -64,7 +65,7 @@ export class CircularLinkedList extends AbstractLinkedList {
         }
     }
 
-    removeFromFront () {
+    removeFromFront (returnOptions?: ListBasedReturnOptionsDto) {
         const removed_node = this.tail?.next ?? this.tail
 
         if (this.size == 0) {
@@ -79,10 +80,10 @@ export class CircularLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node.data
+        return this.returnOptions(removed_node, returnOptions)
     }
 
-    removeFromBack () {
+    removeFromBack (returnOptions?: ListBasedReturnOptionsDto) {
         const removed_node = this.tail
 
         if (this.size == 0) {
@@ -104,10 +105,10 @@ export class CircularLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node.data
+        return this.returnOptions(removed_node, returnOptions)
     }
 
-    private rDeleteAt (index: number) {
+    private rDeleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) {
         const removed_node = this.at(index, {returnNode: true})
         const prev_node = this.at(index - 1, {returnNode: true})
         const next_node = this.at(index + 1, {returnNode: true})
@@ -116,37 +117,24 @@ export class CircularLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node.data
+        return this.returnOptions(removed_node, returnOptions)
     }
 
-    deleteAt (index: number) {
+    deleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) {
         this.checkIndexRange(index)
 
         if (index == 0) {
-            return this.removeFromFront()
+            return this.removeFromFront(returnOptions)
         }
         else if (index == this.size - 1) {
-            return this.removeFromBack()
+            return this.removeFromBack(returnOptions)
         }
         else {
-            return this.rDeleteAt(index)
+            return this.rDeleteAt(index, returnOptions)
         }
     }
 
-    findAndReturnData (data: any, options?: {returnNode? : boolean}) : any {
-        let current_node = this.tail.next
-
-        do {
-            if (current_node.data == data) break
-            current_node = current_node.next
-        } while (current_node != this.tail.next)
-
-        if (current_node.data != data) current_node.data = null
-
-        return this.checkReturnOptions(current_node, options)
-    }
-
-    findAndReturnIndex (data: any) : number {
+    findIndex(data: any) : number {
         let current_node = this.tail.next
         let index = 0
 
@@ -160,7 +148,20 @@ export class CircularLinkedList extends AbstractLinkedList {
         return current_node.data == data ? index : -1
     }
 
-    at (index: number, options?: {returnNode?: boolean}) : any {
+    find(data: any, returnOptions?: ListBasedReturnOptionsDto) {
+        let current_node = this.tail.next
+
+        do {
+            if (current_node.data == data) break
+            current_node = current_node.next
+        } while (current_node != this.tail.next)
+
+        if (current_node.data != data) current_node = null
+
+        return this.returnOptions(current_node, returnOptions)
+    }
+
+    at (index: number, returnOptions?: ListBasedReturnOptionsDto) : any {
         this.checkIndexRange(index)
 
         let current_node = this.tail.next
@@ -168,7 +169,7 @@ export class CircularLinkedList extends AbstractLinkedList {
             current_node = current_node.next
         }
 
-        return this.checkReturnOptions(current_node, options)
+        return this.returnOptions(current_node, returnOptions)
     }
 
     toArray () : Array <any> {

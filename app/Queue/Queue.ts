@@ -1,4 +1,5 @@
 import { SinglyLinkedList } from "../LinkedList/SinglyLinkedList";
+import { ListBasedReturnOptionsDto } from "../../config/ReturnOptions";
 
 export class Queue {
     private list: SinglyLinkedList
@@ -7,28 +8,28 @@ export class Queue {
         this.list = new SinglyLinkedList()
     }
 
-    get size () {
+    size () : number {
         return this.list.size
     }
 
-    get begin () {
-        return this.list.head?.data || null
+    begin (returnOptions?: ListBasedReturnOptionsDto) : any {
+        return this.list.returnOptions(this.list.head, returnOptions)
     }
 
-    get end () {
-        return this.list.tail?.data || null
+    end (returnOptions?: ListBasedReturnOptionsDto) : any {
+        return this.list.returnOptions(this.list.tail, returnOptions)
     }
 
     enqueue (data: any) {
         return this.list.addToBack(data)
     }
 
-    dequeue () {
-        return this.list.removeFromFront()
+    dequeue (returnOptions?: ListBasedReturnOptionsDto) {
+        return this.list.removeFromFront(returnOptions)
     }
 
     isEmpty () {
-        return this.size == 0 && this.end == null && this.begin == null
+        return this.size() == 0 && this.end() == null && this.begin() == null
     }
 
     clear () {

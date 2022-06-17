@@ -1,5 +1,6 @@
 import { AbstractLinkedList } from "./AbstractLinkedList";
 import { ListNode } from "./ListNode";
+import { ListBasedReturnOptionsDto } from "../../config/ReturnOptions";
 
 export class DoublyLinkedList extends AbstractLinkedList {
     addToFront (data: any): void {
@@ -56,7 +57,7 @@ export class DoublyLinkedList extends AbstractLinkedList {
         }
     }
 
-    removeFromFront () {
+    removeFromFront (returnOptions?: ListBasedReturnOptionsDto) {
         const removed_node = this.head
 
         if (this.size == 0) {
@@ -73,10 +74,10 @@ export class DoublyLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node.data
+        return this.returnOptions(removed_node, returnOptions)
     }
 
-    removeFromBack () {
+    removeFromBack (returnOptions?: ListBasedReturnOptionsDto) {
         const removed_node = this.tail
 
         if (this.size == 0) {
@@ -93,10 +94,10 @@ export class DoublyLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node.data
+        return this.returnOptions(removed_node, returnOptions)
     }
 
-    private rDeleteAt (index: number) : any {
+    private rDeleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) : any {
         const removed_node = this.at(index, {returnNode: true})
         const prev_node = this.at(index - 1, {returnNode: true})
         const next_node = this.at(index + 1, {returnNode: true})
@@ -106,20 +107,20 @@ export class DoublyLinkedList extends AbstractLinkedList {
 
         this.decrementSize()
 
-        return removed_node.data
+        return this.returnOptions(removed_node, returnOptions)
     }
 
-    deleteAt (index: number) {
+    deleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) {
         this.checkIndexRange(index)
 
         if (index == 0) {
-            return this.removeFromFront()
+            return this.removeFromFront(returnOptions)
         }
         else if (index == this.size - 1) {
-            return this.removeFromBack()
+            return this.removeFromBack(returnOptions)
         }
         else {
-            return this.rDeleteAt(index)
+            return this.rDeleteAt(index, returnOptions)
         }
     }
 }

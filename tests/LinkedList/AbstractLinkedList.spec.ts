@@ -4,12 +4,12 @@ import { ListNode } from '../../app/LinkedList/ListNode'
 let empty_list = new AbstractLinkedList()
 let full_list = new AbstractLinkedList()
 
+const node1 = new ListNode(1)
+const node2 = new ListNode(2)
+const node3 = new ListNode(3)
+
 beforeEach(() => {
     empty_list = new AbstractLinkedList()
-
-    const node1 = new ListNode(1)
-    const node2 = new ListNode(2)
-    const node3 = new ListNode(3)
 
     node1.next = node2
     node2.next = node3
@@ -63,33 +63,17 @@ describe('check index range', () => {
     })
 })
 
-describe('check return options', () => {
-    test('return node option is empty or false', () => {
-        const node4 = new ListNode(4)
-        
-        expect(full_list.checkReturnOptions(node4)).toBe(4)
-
-        expect(
-            full_list.checkReturnOptions(node4, {returnNode: false})
-        ).toBe(4)
+describe('return options', () => {
+    test('return node', () => {
+        expect(full_list.returnOptions(node3, {returnNode: true})).toBe(node3)
     })
 
-    test('return node option is true', () => {
-        const node4 = new ListNode(4)
-        
-        expect(
-            full_list.checkReturnOptions(node4, {returnNode: true})
-        ).toStrictEqual(node4)
+    test('return index', () => {
+        expect(full_list.returnOptions(node3, {returnIndex: true})).toBe(2)
     })
 
-    test ('node is null or undefined', () => {
-        expect(
-            full_list.checkReturnOptions(null)
-        ).toBe(null)
-
-        expect(
-            full_list.checkReturnOptions(undefined)
-        ).toBe(null)
+    test('return data', () => {
+        expect(full_list.returnOptions(node3)).toBe(3)
     })
 })
 
@@ -132,16 +116,20 @@ describe('not implemented functions', () => {
 })
 
 describe('find functions', () => {
-    test('find options are empty or false', () => {
+    test('find and return data', () => {
         expect(full_list.find(1)).toBe(1)
     })
 
-    test('find index is true', () => {
+    test('find and return node', () => {
+        expect(full_list.find(1, {returnNode: true})).toBe(node1)
+    })
+
+    test('find and return index', () => {
         expect(full_list.find(1, {returnIndex: true})).toBe(0)
     })
 
     test('not found', () => {
-        expect(full_list.find(4)).toBe(null)
+        expect(full_list.find(4)).toBe(undefined)
     })
 
     test('at range', () => {
