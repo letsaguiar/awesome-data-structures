@@ -8,8 +8,9 @@ on:
       - completed
 
 jobs:
-  look-for-errors:
+  publish-release:
     runs-on: ubuntu-latest
+    environment: semantic-release
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
