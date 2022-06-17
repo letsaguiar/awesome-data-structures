@@ -1,11 +1,13 @@
 export class ListNode {
-    data: any
-    next: ListNode
-    prev: ListNode
+  data: any;
 
-    constructor (data: any) {
-        this.data = data
-        this.next = null
-        this.prev = null
-    }
+  next: ListNode;
+
+  prev: ListNode;
+
+  constructor(data: any) {
+    this.data = data;
+    this.next = null;
+    this.prev = null;
+  }
 }
