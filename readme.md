@@ -4,6 +4,9 @@
     <a href="#" alt="Version">
         <img src="https://img.shields.io/github/package-json/v/letsaguiar/awesome-data-structures?color=%23f&style=for-the-badge">
     </a>
+    <a href="#" alt="Coverage">
+        <img src="https://img.shields.io/codecov/c/github/letsaguiar/awesome-data-structures?color=%23f&style=for-the-badge">
+    </a>
     <a href="#" alt="Contributors">
         <img src="https://img.shields.io/github/contributors/letsaguiar/awesome-data-structures?color=%23f&style=for-the-badge">
     </a>
