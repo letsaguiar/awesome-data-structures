@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="#" alt="Version">
-        <img src="https://img.shields.io/github/package-json/v/letsaguiar/awesome-data-structures?color=%23f&style=for-the-badge">
+        <img src="https://img.shields.io/npm/v/awesome-data-structures?color=%23f&label=version&style=for-the-badge">
     </a>
     <a href="#" alt="Coverage">
         <img src="https://img.shields.io/codecov/c/github/letsaguiar/awesome-data-structures?color=%23f&style=for-the-badge">
