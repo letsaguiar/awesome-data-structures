@@ -37,7 +37,7 @@ export class Deque {
   }
 
   isEmpty() {
-    return this.size() === 0 && this.end() === null && this.begin() === null;
+    return !this.size() && !this.end() && !this.begin();
   }
 
   clear() {
