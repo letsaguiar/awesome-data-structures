@@ -11,7 +11,8 @@
     "test": "jest",
     "test-coverage": "jest --coverage",
     "build": "tsc",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "lint": "eslint . --ext .ts"
   },
   "author": "Letícia Aguiar",
   "license": "MIT",
