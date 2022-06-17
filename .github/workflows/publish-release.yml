@@ -23,9 +23,8 @@ jobs:
       - name: Build tsc
         run: npm run build
 
-      - name: Release
+      - name: Publish release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-
