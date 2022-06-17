@@ -1,6 +1,6 @@
 {
   "name": "awesome-data-structures",
-  "version": "0.0.0-development",
+  "version": "1.1.0-development",
   "description": "Awesome Data Structures is an npm package that brings together all tha main ready-to-use data structures",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
