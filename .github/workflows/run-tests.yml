@@ -1,5 +1,7 @@
 name: run-tests
+
 on: [push]
+
 jobs:
   look-for-errors:
     runs-on: ubuntu-latest

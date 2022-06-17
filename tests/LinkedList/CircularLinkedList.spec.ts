@@ -146,6 +146,7 @@ describe('remove functions', () => {
 describe('find functions', () => {
     test('find options are empty or false', () => {
         expect(full_list.find(1)).toBe(1)
+        expect(full_list.find(4, {returnIndex: true})).toBe(-1)
     })
 
     test('find index is true', () => {
