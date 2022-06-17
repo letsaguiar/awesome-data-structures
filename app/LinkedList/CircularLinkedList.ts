@@ -1,186 +1,176 @@
-import { AbstractLinkedList } from "./AbstractLinkedList";
-import { ListNode } from "./ListNode";
-import { ListBasedReturnOptionsDto } from "../../config/ReturnOptions";
+import { AbstractLinkedList } from './AbstractLinkedList';
+import { ListNode } from './ListNode';
+import { ListBasedReturnOptionsDto } from '../../config/ReturnOptions';
 
 export class CircularLinkedList extends AbstractLinkedList {
-    addToFront(data: any): void {
-        const new_node = new ListNode(data)
+  addToFront(data: any): void {
+    const newNode = new ListNode(data);
 
-        if (this.size == 0) {
-            this.tail = new_node
-            this.tail.next = new_node
-        }
-        else if (this.size == 1) {
-            this.tail.next = new_node
-            new_node.next = this.tail
-        }
-        else {
-            new_node.next = this.tail.next
-            this.tail.next = new_node
-        }
-
-        this.incrementSize()
+    if (this.size === 0) {
+      this.tail = newNode;
+      this.tail.next = newNode;
+    } else if (this.size === 1) {
+      this.tail.next = newNode;
+      newNode.next = this.tail;
+    } else {
+      newNode.next = this.tail.next;
+      this.tail.next = newNode;
     }
 
-    addToBack(data: any): void {
-        const new_node = new ListNode(data)
+    this.incrementSize();
+  }
 
-        if (this.size == 0) {
-            this.tail = new_node
-            this.tail.next = new_node
-        }
-        else if (this.size == 1) {
-            this.tail.next = new_node
-            new_node.next = this.tail
-            this.tail = new_node
-        }
-        else {
-            new_node.next = this.tail.next
-            this.tail.next = new_node
-            this.tail = new_node
-        }
+  addToBack(data: any): void {
+    const newNode = new ListNode(data);
 
-        this.incrementSize()
+    if (this.size === 0) {
+      this.tail = newNode;
+      this.tail.next = newNode;
+    } else if (this.size === 1) {
+      this.tail.next = newNode;
+      newNode.next = this.tail;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.tail.next;
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
 
-    private rInsertAt (data: any, index: number): void {
-        const new_node = new ListNode(data)
-        const prev_node = this.at(index - 1, {returnNode: true})
-        const next_node = this.at(index, {returnNode: true})
+    this.incrementSize();
+  }
 
-        prev_node.next = new_node
-        new_node.next = next_node
+  private rInsertAt(data: any, index: number): void {
+    const newNode = new ListNode(data);
+    const prevNode = this.at(index - 1, { returnNode: true });
+    const nextNode = this.at(index, { returnNode: true });
 
-        this.incrementSize()
+    prevNode.next = newNode;
+    newNode.next = nextNode;
+
+    this.incrementSize();
+  }
+
+  insertAt(data: any, index: number): void {
+    this.checkIndexRange(index);
+
+    if (index === 0) {
+      return this.addToFront(data);
     }
 
-    insertAt (data: any, index: number): void {
-        this.checkIndexRange(index)
+    return this.rInsertAt(data, index);
+  }
 
-        if (index == 0) {
-            return this.addToFront(data)
-        }
-        else {
-            return this.rInsertAt(data, index)
-        }
+  removeFromFront(returnOptions?: ListBasedReturnOptionsDto) {
+    const removedNode = this.tail?.next ?? this.tail;
+
+    if (this.size === 0) {
+      throw new Error("Can't remove from empty list");
+    } else if (this.size === 1) {
+      this.tail = null;
+    } else {
+      this.tail.next = this.tail.next.next;
     }
 
-    removeFromFront (returnOptions?: ListBasedReturnOptionsDto) {
-        const removed_node = this.tail?.next ?? this.tail
+    this.decrementSize();
 
-        if (this.size == 0) {
-            throw new Error("Can't remove from empty list")
-        }
-        else if (this.size == 1) {
-            this.tail = null
-        }
-        else {
-            this.tail.next = this.tail.next.next
-        }
+    return this.returnOptions(removedNode, returnOptions);
+  }
 
-        this.decrementSize()
+  removeFromBack(returnOptions?: ListBasedReturnOptionsDto) {
+    const removedNode = this.tail;
 
-        return this.returnOptions(removed_node, returnOptions)
+    if (this.size === 0) {
+      throw new Error("Can't remove from empty list");
+    } else if (this.size === 1) {
+      this.tail = null;
+    } else {
+      let currentNode = this.tail.next;
+
+      do {
+        currentNode = currentNode.next;
+      } while (currentNode.next !== this.tail);
+
+      currentNode.next = this.tail.next;
+      this.tail = currentNode;
     }
 
-    removeFromBack (returnOptions?: ListBasedReturnOptionsDto) {
-        const removed_node = this.tail
+    this.decrementSize();
 
-        if (this.size == 0) {
-            throw new Error("Can't remove from empty list")
-        }
-        else if (this.size == 1) {
-            this.tail = null
-        }
-        else {
-            let current_node = this.tail.next
+    return this.returnOptions(removedNode, returnOptions);
+  }
 
-            do {
-                current_node = current_node.next
-            } while (current_node.next != this.tail)
+  private rDeleteAt(index: number, returnOptions?: ListBasedReturnOptionsDto) {
+    const removedNode = this.at(index, { returnNode: true });
+    const prevNode = this.at(index - 1, { returnNode: true });
+    const nextNode = this.at(index + 1, { returnNode: true });
 
-            current_node.next = this.tail.next
-            this.tail = current_node
-        }
+    prevNode.next = nextNode;
 
-        this.decrementSize()
+    this.decrementSize();
 
-        return this.returnOptions(removed_node, returnOptions)
+    return this.returnOptions(removedNode, returnOptions);
+  }
+
+  deleteAt(index: number, returnOptions?: ListBasedReturnOptionsDto) {
+    this.checkIndexRange(index);
+
+    if (index === 0) {
+      return this.removeFromFront(returnOptions);
+    }
+    if (index === this.size - 1) {
+      return this.removeFromBack(returnOptions);
     }
 
-    private rDeleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) {
-        const removed_node = this.at(index, {returnNode: true})
-        const prev_node = this.at(index - 1, {returnNode: true})
-        const next_node = this.at(index + 1, {returnNode: true})
+    return this.rDeleteAt(index, returnOptions);
+  }
 
-        prev_node.next = next_node
+  findIndex(data: any) : number {
+    let currentNode = this.tail.next;
+    let index = 0;
 
-        this.decrementSize()
+    do {
+      if (currentNode.data === data) break;
 
-        return this.returnOptions(removed_node, returnOptions)
+      currentNode = currentNode.next;
+      index += 1;
+    } while (currentNode !== this.tail.next);
+
+    return currentNode.data === data ? index : -1;
+  }
+
+  find(data: any, returnOptions?: ListBasedReturnOptionsDto) {
+    let currentNode = this.tail.next;
+
+    do {
+      if (currentNode.data === data) break;
+      currentNode = currentNode.next;
+    } while (currentNode !== this.tail.next);
+
+    if (currentNode.data !== data) currentNode = null;
+
+    return this.returnOptions(currentNode, returnOptions);
+  }
+
+  at(index: number, returnOptions?: ListBasedReturnOptionsDto) : any {
+    this.checkIndexRange(index);
+
+    let currentNode = this.tail.next;
+    for (let i = 0; i < index; i++) {
+      currentNode = currentNode.next;
     }
 
-    deleteAt (index: number, returnOptions?: ListBasedReturnOptionsDto) {
-        this.checkIndexRange(index)
+    return this.returnOptions(currentNode, returnOptions);
+  }
 
-        if (index == 0) {
-            return this.removeFromFront(returnOptions)
-        }
-        else if (index == this.size - 1) {
-            return this.removeFromBack(returnOptions)
-        }
-        else {
-            return this.rDeleteAt(index, returnOptions)
-        }
-    }
+  toArray() : Array <any> {
+    let currentNode = this.tail.next;
+    const array = [];
 
-    findIndex(data: any) : number {
-        let current_node = this.tail.next
-        let index = 0
+    do {
+      array.push(currentNode.data);
+      currentNode = currentNode.next;
+    } while (currentNode !== this.tail.next);
 
-        do {
-            if (current_node.data == data) break
-
-            current_node = current_node.next
-            index = index + 1
-        } while (current_node != this.tail.next)
-
-        return current_node.data == data ? index : -1
-    }
-
-    find(data: any, returnOptions?: ListBasedReturnOptionsDto) {
-        let current_node = this.tail.next
-
-        do {
-            if (current_node.data == data) break
-            current_node = current_node.next
-        } while (current_node != this.tail.next)
-
-        if (current_node.data != data) current_node = null
-
-        return this.returnOptions(current_node, returnOptions)
-    }
-
-    at (index: number, returnOptions?: ListBasedReturnOptionsDto) : any {
-        this.checkIndexRange(index)
-
-        let current_node = this.tail.next
-        for (let i=0; i < index; i++) {
-            current_node = current_node.next
-        }
-
-        return this.returnOptions(current_node, returnOptions)
-    }
-
-    toArray () : Array <any> {
-        let current_node = this.tail.next
-        const array = []
-
-        do {
-            array.push(current_node.data)
-            current_node = current_node.next
-        } while (current_node != this.tail.next)
-
-        return array
-    }
+    return array;
+  }
 }

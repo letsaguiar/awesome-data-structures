@@ -1,40 +1,40 @@
-import { SinglyLinkedList } from '../LinkedList/SinglyLinkedList'
-import { ListBasedReturnOptionsDto } from '../../config/ReturnOptions'
+import { SinglyLinkedList } from '../LinkedList/SinglyLinkedList';
+import { ListBasedReturnOptionsDto } from '../../config/ReturnOptions';
 
-export class Stack{
-    private list: SinglyLinkedList
+export class Stack {
+  private list: SinglyLinkedList;
 
-    constructor () {
-        this.list = new SinglyLinkedList()
-    }
+  constructor() {
+    this.list = new SinglyLinkedList();
+  }
 
-    size () : number {
-        return this.list.size
-    }
+  size() : number {
+    return this.list.size;
+  }
 
-    begin (returnOptions?: ListBasedReturnOptionsDto) : any {
-        return this.list.returnOptions(this.list.head, returnOptions)
-    }
+  begin(returnOptions?: ListBasedReturnOptionsDto) : any {
+    return this.list.returnOptions(this.list.head, returnOptions);
+  }
 
-    end (returnOptions?: ListBasedReturnOptionsDto) : any {
-        return this.list.returnOptions(this.list.tail, returnOptions)
-    }
+  end(returnOptions?: ListBasedReturnOptionsDto) : any {
+    return this.list.returnOptions(this.list.tail, returnOptions);
+  }
 
-    push (data: any) {
-        return this.list.addToFront(data)
-    }
+  push(data: any) {
+    return this.list.addToFront(data);
+  }
 
-    pop (returnOptions?: ListBasedReturnOptionsDto) {
-        return this.list.removeFromFront(returnOptions)
-    }
+  pop(returnOptions?: ListBasedReturnOptionsDto) {
+    return this.list.removeFromFront(returnOptions);
+  }
 
-    isEmpty () {
-        return this.size() == 0 && this.end() == null && this.begin() == null
-    }
+  isEmpty() {
+    return this.size() === 0 && this.end() === null && this.begin() === null;
+  }
 
-    clear () {
-        this.list.head = null
-        this.list.tail = null
-        this.list.size = 0
-    }
+  clear() {
+    this.list.head = null;
+    this.list.tail = null;
+    this.list.size = 0;
+  }
 }

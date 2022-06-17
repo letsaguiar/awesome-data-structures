@@ -1,40 +1,40 @@
-import { SinglyLinkedList } from "../LinkedList/SinglyLinkedList";
-import { ListBasedReturnOptionsDto } from "../../config/ReturnOptions";
+import { SinglyLinkedList } from '../LinkedList/SinglyLinkedList';
+import { ListBasedReturnOptionsDto } from '../../config/ReturnOptions';
 
 export class Queue {
-    private list: SinglyLinkedList
-    
-    constructor () {
-        this.list = new SinglyLinkedList()
-    }
+  private list: SinglyLinkedList;
 
-    size () : number {
-        return this.list.size
-    }
+  constructor() {
+    this.list = new SinglyLinkedList();
+  }
 
-    begin (returnOptions?: ListBasedReturnOptionsDto) : any {
-        return this.list.returnOptions(this.list.head, returnOptions)
-    }
+  size() : number {
+    return this.list.size;
+  }
 
-    end (returnOptions?: ListBasedReturnOptionsDto) : any {
-        return this.list.returnOptions(this.list.tail, returnOptions)
-    }
+  begin(returnOptions?: ListBasedReturnOptionsDto) : any {
+    return this.list.returnOptions(this.list.head, returnOptions);
+  }
 
-    enqueue (data: any) {
-        return this.list.addToBack(data)
-    }
+  end(returnOptions?: ListBasedReturnOptionsDto) : any {
+    return this.list.returnOptions(this.list.tail, returnOptions);
+  }
 
-    dequeue (returnOptions?: ListBasedReturnOptionsDto) {
-        return this.list.removeFromFront(returnOptions)
-    }
+  enqueue(data: any) {
+    return this.list.addToBack(data);
+  }
 
-    isEmpty () {
-        return this.size() == 0 && this.end() == null && this.begin() == null
-    }
+  dequeue(returnOptions?: ListBasedReturnOptionsDto) {
+    return this.list.removeFromFront(returnOptions);
+  }
 
-    clear () {
-        this.list.head = null
-        this.list.tail = null
-        this.list.size = 0
-    }
+  isEmpty() {
+    return this.size() === 0 && this.end() === null && this.begin() === null;
+  }
+
+  clear() {
+    this.list.head = null;
+    this.list.tail = null;
+    this.list.size = 0;
+  }
 }
