@@ -1,0 +1,26 @@
+name: publish-release
+
+on:
+  workflow_run:
+    workflows: ["run-tests"]
+    branches: [production]
+    types:
+      - completed
+
+jobs:
+  look-for-errors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '17'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
