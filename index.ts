@@ -4,6 +4,7 @@ import { CircularLinkedList } from './app/LinkedList/CircularLinkedList';
 import { Queue } from './app/Queue/Queue';
 import { Stack } from './app/Stack/Stack';
 import { Deque } from './app/Deque/Deque';
+import { BST } from './app/BST/BST';
 
 export {
   SinglyLinkedList,
@@ -12,4 +13,5 @@ export {
   Queue,
   Stack,
   Deque,
+  BST,
 };
