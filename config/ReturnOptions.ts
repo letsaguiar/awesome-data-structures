@@ -3,3 +3,8 @@ export interface ListBasedReturnOptionsDto {
     returnNode?: boolean;
     returnIndex?: boolean;
 }
+
+export interface BSTBasedReturnOptionsDto {
+    returnData?: boolean;
+    returnNode?: boolean;
+}
