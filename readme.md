@@ -34,6 +34,16 @@ With this package, you can build efficient applications, using the right data st
 
 Awesome Data Structures is an easy-to-use application. Regardless of which data structure you want to use, you just need to import the desired class and initialize it. 
 
+## Supported Data Structures
+- LinkedList
+    - SinglyLinkedList
+    - DoublyLinkedList
+    - CircularLinkedList
+- Stacks
+- Queue
+- Deque
+- BST
+
 ### Installation
 
 ```
